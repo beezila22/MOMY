@@ -31,7 +31,7 @@ module.exports = {
 
   OTP_EXPIRY: 300000,
 
-  OWNER_NUMBER: '923078071982',
+  OWNER_NUMBER: '',
 
   DEV_MODE: 'false',
 
