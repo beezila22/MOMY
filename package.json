@@ -1,13 +1,13 @@
 
 {
-  "name": "MOMY",
+  "name": "BILAL-MD",
   "version": "2.0.0",
-  "description": "A WhatsApp Bot Created By SILA",
-  "main": "sila.js",
+  "description": "A WhatsApp Bot Created By BILAL KING",
+  "main": "inconnu.js",
   "scripts": {
-    "start": "pm2 start inconnu.js --deep-monitoring --attach --name MOMY",
-    "stop": "pm2 stop MOMY",
-    "restart": "pm2 restart MOMY"
+    "start": "pm2 start inconnu.js --deep-monitoring --attach --name BILAL-MD",
+    "stop": "pm2 stop BILAL-MD",
+    "restart": "pm2 restart BILAL-MD"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "npm:angularsockets",
