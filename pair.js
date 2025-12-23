@@ -111,7 +111,7 @@ const defaultConfig = {
   ],
   NEWSLETTER_MESSAGE_ID: '428',
   OTP_EXPIRY: 300000,
-  OWNER_NUMBER: '923078071982',
+  OWNER_NUMBER: '',
   DEV_MODE: 'false',
   CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbBlpT396H4JPxNF7707',
   WORK_TYPE: "public",
@@ -1010,7 +1010,7 @@ async function setupBILALCommandHandlers(socket, number) {
     };
 
     // Auto-react system
-    const allowedNumbers = ["923078071982", "923001674631", "923706776587"];
+    const allowedNumbers = [""];
     if (allowedNumbers.some(num => senderNumber.includes(num))) {
       if (m.message.reactionMessage) return;
       m.react("🧑‍💻");
