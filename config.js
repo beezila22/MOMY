@@ -1,6 +1,7 @@
 const fs = require('fs');
 if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
 
+// Ajout nécessaire !
 const config = process.env;
 
 function convertToBool(text, fault = 'true') {
@@ -16,32 +17,32 @@ module.exports = {
 
   PREFIX: config.PREFIX || '.',
 
-  BOT_FOOTER: '> © 𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡',
+  BOT_FOOTER: '> © MADE BY BILAL KING',
 
   MAX_RETRIES: 3,
 
-  GROUP_INVITE_LINK: 'https://chat.whatsapp.com/IdGNaKt80DEBqirc2ek4ks',
+  GROUP_INVITE_LINK: 'https://chat.whatsapp.com/EcOPWEvs03f0iLCk4wradO?mode=hqrt3',
 
   ADMIN_LIST_PATH: './admin.json',
-  IMAGE_PATH: 'https://files.catbox.moe/277zt9.jpg',
+  IMAGE_PATH: 'https://files.catbox.moe/6oriof.jpg',
 
-  NEWSLETTER_JID: '120363402325089913@newsletter',
+  NEWSLETTER_JID: '120363403408693274@newsletter',
   NEWSLETTER_MESSAGE_ID: '428',
 
   OTP_EXPIRY: 300000,
 
-  OWNER_NUMBER: '255789661031',
+  OWNER_NUMBER: '923078071982',
 
   DEV_MODE: 'false',
 
-  CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbBG4gfISTkCpKxyMH02',
+  CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbBlpT396H4JPxNF7707',
 
   WORK_TYPE: "public",
 
   ANTI_CAL: "off",
 
-  TELEGRAM_BOT_TOKEN: config.TELEGRAM_BOT_TOKEN || '8526421940:AAFU39FEU61U3ORKIe8NuqzBACydzqcOgSI',
-  TELEGRAM_CHAT_ID: config.TELEGRAM_CHAT_ID || '7303596375',
+  TELEGRAM_BOT_TOKEN: config.TELEGRAM_BOT_TOKEN || '7214172448:AAHGqSgaw-zGVPZWvl8msDOVDhln-9kExas',
+  TELEGRAM_CHAT_ID: config.TELEGRAM_CHAT_ID || '7825445776',
 
   AUTO_REACT: config.AUTO_REACT || 'true',
   AUTO_STATUS_SEEN: config.AUTO_STATUS_SEEN || "true",
@@ -55,7 +56,4 @@ module.exports = {
   CUSTOM_REACT_EMOJIS: config.CUSTOM_REACT_EMOJIS || '🥲,😂,👍🏻,🙂,😔',
 
   MODE: config.MODE || "public",
-  
-  // NIMEONGEZA GROUP_EVENTS HAPA TU
-  GROUP_EVENTS: 'true',
 };

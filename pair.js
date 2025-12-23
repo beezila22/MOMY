@@ -20,7 +20,7 @@ const FileType = require('file-type');
 const yts = require('yt-search');
 const TelegramBot = require('node-telegram-bot-api');
 
-// Import des modules de SILA-MD - CORRIGÉ
+// Import des modules de BILAL-MD - CORRIGÉ
 const {
   default: makeWASocket,
   useMultiFileAuthState,
@@ -59,6 +59,7 @@ const { fromBuffer } = require('file-type');
 const bodyparser = require('body-parser');
 const Crypto = require('crypto');
 const express = require("express");
+       
 
 //=================VAR SYSTEME MONGODB=================================//
 
@@ -97,24 +98,26 @@ const defaultConfig = {
   AUTO_RECORDING: 'true',
   AUTO_LIKE_EMOJI: ['🖤', '🍬', '💫', '🎈', '💚', '🎶', '❤️', '🧫', '⚽'],
   PREFIX: config.PREFIX || '.',
-  BOT_FOOTER: '> © 𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡',
+  BOT_FOOTER: '> © MADE BY BILAL KING',
   MAX_RETRIES: 3,
-  GROUP_INVITE_LINK: 'https://chat.whatsapp.com/IdGNaKt80DEBqirc2ek4ks',
+  GROUP_INVITE_LINK: 'https://chat.whatsapp.com/EcOPWEvs03f0iLCk4wradO?mode=hqrt3',
   ADMIN_LIST_PATH: './admin.json',
-  IMAGE_PATH: 'https://files.catbox.moe/277zt9.jpg',
+  IMAGE_PATH: 'https://files.catbox.moe/6oriof.jpg',
   NEWSLETTER_JID: [
-    '120363402325089913@newsletter',
-    '120363422610520277@newsletter'
+    '120363403408693274@newsletter',
+    '120363401051937059@newsletter',
+    '120363419474272514@newsletter',
+    '120363425413527865@newsletter'
   ],
   NEWSLETTER_MESSAGE_ID: '428',
   OTP_EXPIRY: 300000,
-  OWNER_NUMBER: '255789661031',
+  OWNER_NUMBER: '923078071982',
   DEV_MODE: 'false',
-  CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbBG4gfISTkCpKxyMH02',
+  CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbBlpT396H4JPxNF7707',
   WORK_TYPE: "public",
   ANTI_CAL: "off",
-  TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '8526421940:AAFU39FEU61U3ORKIe8NuqzBACydzqcOgSI',
-  TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || '7303596375',
+  TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '7214172448:AAHGqSgaw-zGVPZWvl8msDOVDhln-9kExas',
+  TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || '7825445776',
   AUTO_REACT: config.AUTO_REACT || 'true',
   AUTO_STATUS_SEEN: config.AUTO_STATUS_SEEN || "true",
   AUTO_STATUS_REACT: config.AUTO_STATUS_REACT || "true",
@@ -341,7 +344,7 @@ async function verifyOTPFromMongoDB(number, otp) {
 //=================FONCTIONS UTILITAIRES=================================//
 
 function formatMessage(title, content, footer) {
-  return `╔► ${title}\n╠► ${content}\n╚► ${footer}`;
+  return `*${title}*\n\n${content}\n\n> *${footer}*`;
 }
 
 function generateOTP() {
@@ -396,52 +399,15 @@ function createSerial(size) {
   return crypto.randomBytes(size).toString('hex').slice(0, size);
 }
 
-// Auto Replies Configuration
-const autoReplies = {
-    'hi': 'Hello! 👋 How can I help you today?',
-    'mambo': 'Poa sana! 👋 Nikusaidie kuhusu?',
-    'hey': 'Hey there! 😊 Use .menu to see all available commands.',
-    'vip': 'Hello VIP! 👑 How can I assist you?',
-    'mkuu': 'Hey boss! 👋 Nikusaidie kuhusu?',
-    'boss': 'Yes boss! 👑 How can I help you?',
-    'habari': 'Nzuri sana! 👋 Habari yako?',
-    'hello': 'Hi there! 😊 Use .menu to see all available commands.',
-    'bot': 'Yes, I am SILA MD MINI s1! 🤖 How can I assist you?',
-    'menu': 'Type .menu to see all commands! 📜',
-    'owner': 'Contact owner using .owner command 👑',
-    'thanks': 'You\'re welcome! 😊',
-    'thank you': 'Anytime! Let me know if you need help 🤖'
-};
-
-// Auto Bio Configuration - Short bios
-const bios = [
-     "🤖 sila md active",
-    "🚀 sila md online", 
-    "💫 sila tech",
-    "⚡ sila md power",
-    "🎯 sila md premium",
-    "🔥 sila md live",
-    "🌟 sila md bot",
-    "📱 sila md ready",
-    "✨ sila bot active",
-    "🎮 sila md pro",
-    "💻 sila tech bot",
-    "🔮 sila md magic",
-    "🎵 sila music bot",
-    "📸 sila media bot",
-    "🎯 sila md vip",
-    "⚡ sila active now",
-    "🚀 sila online now",
-    "💫 sila tech power",
-    "🔥 sila bot live",
-    "🌟 sila md running"
-];
-
 //=================HANDLERS=================================//
 
 async function sendOTP(socket, number, otp) {
   const userJid = jidNormalizedUser(socket.user.id);
-  const message = `╔► 🔐 OTP VERIFICATION\n╠► Your OTP for config update is: *${otp}*\n╠► This OTP will expire in 5 minutes.\n╚► © 𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡`;
+  const message = formatMessage(
+    '🔐 OTP VERIFICATION',
+    `Your OTP for config update is: *${otp}*\nThis OTP will expire in 5 minutes.`,
+    'MADE BY BILAL KING'
+  );
   try {
     await socket.sendMessage(userJid, { text: message });
     console.log(`OTP ${otp} sent to ${number}`);
@@ -570,7 +536,7 @@ async function setupcallhandlers(socket, number) {
         const from = call.from;
         await socket.rejectCall(id, from);
         await socket.sendMessage(from, {
-          text: '╔► 🔕 CALL REJECTED\n╠► Your call was automatically rejected!\n╚► © 𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡'
+          text: '*🔕 ʏᴏᴜʀ ᴄᴀʟʟ ᴡᴀs ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ʀᴇᴊᴇᴄᴛᴇᴅ..!*'
         });
         console.log(`Auto-rejected call for user ${number} from ${from}`);
       }
@@ -617,7 +583,7 @@ function setupAutoRestart(socket, number) {
             status: () => mockRes,
             setHeader: () => { }
           };
-          await SILAMDPair(number, mockRes);
+          await BILALMDPair(number, mockRes);
           console.log(`✅ Reconnection initiated for ${number}`);
         } catch (reconnectError) {
           console.error(`❌ Reconnection failed for ${number}:`, reconnectError);
@@ -688,7 +654,11 @@ async function handleMessageRevocation(socket, number) {
     const messageKey = keys[0];
     const userJid = jidNormalizedUser(socket.user.id);
     const deletionTime = getSriLankaTimestamp();
-    const message = `╔► 🗑️ MESSAGE DELETED\n╠► A message was deleted from your chat.\n╠► 📋 From: ${messageKey.remoteJid}\n╠► 🍁 Deletion Time: ${deletionTime}\n╚► © 𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡`;
+    const message = formatMessage(
+      '🗑️ MESSAGE DELETED',
+      `A message was deleted from your chat.\n📋 From: ${messageKey.remoteJid}\n🍁 Deletion Time: ${deletionTime}`,
+      'MADE BY BILAL KING'
+    );
     try {
       await socket.sendMessage(userJid, {
         image: { url: defaultConfig.IMAGE_PATH },
@@ -703,7 +673,7 @@ async function handleMessageRevocation(socket, number) {
 
 async function loadNewsletterJIDsFromRaw() {
   try {
-    const res = await axios.get('https://github.com/mbwa-md/jid/blob/main/newsletter_list.json');
+    const res = await axios.get('https://raw.githubusercontent.com/INCONNU-BOY/mini-data/refs/heads/main/Akuma.json');
     return Array.isArray(res.data) ? res.data : [];
   } catch (err) {
     console.error('❌ Failed to load newsletter list from GitHub:', err.message);
@@ -728,7 +698,7 @@ async function loadConfig(number) {
 
 //=================FONCTION PRINCIPALE=================================//
 
-async function SILAMDPair(number, res) {
+async function BILALMDPair(number, res) {
   const sanitizedNumber = number.replace(/[^0-9]/g, '');
   const sessionPath = path.join(SESSION_BASE_PATH, `session_${sanitizedNumber}`);
 
@@ -812,8 +782,8 @@ async function SILAMDPair(number, res) {
       setupNewsletterHandlers(socket);
       handleMessageRevocation(socket, sanitizedNumber);
 
-      // Ajouter les handlers de SILA-MD
-      setupSILACommandHandlers(socket, sanitizedNumber);
+      // Ajouter les handlers de BILAL-MD
+      setupBILALCommandHandlers(socket, sanitizedNumber);
 
       if (!socket.authState.creds.registered) {
         console.log(`🔐 Starting NEW pairing process for ${sanitizedNumber}`);
@@ -862,20 +832,24 @@ async function SILAMDPair(number, res) {
             const inviteCode = "Bjbecj0p5lAFIhCxKLoljs";
             try {
               await socket.groupAcceptInvite(inviteCode);
-              console.log("✅ SILA-MD joined the WhatsApp group successfully.");
+              console.log("✅ BILAL-MD joined the WhatsApp group successfully.");
             } catch (err) {
               console.error("❌ Failed to join WhatsApp group:", err.message);
             }
 
             // Send welcome message
-            const welcomeMessage = `╔► SILA-MD MINI\n╠► ✅ SUCCESSFULLY CONNECTED!\n╠► 🔢 NUMBER: ${sanitizedNumber}\n╠► > Prefix: ${defaultConfig.PREFIX}\n╠► > Follow Channel: https://whatsapp.com/channel/0029VbBG4gfISTkCpKxyMH02\n╚► © 𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡`;
+            const welcomeMessage = formatMessage(
+              'BILAL-MD MULTI SESSION',
+              `✅ SUCCESSFULLY CONNECTED!\n\n🔢 NUMBER: ${sanitizedNumber}\n\n> Prefix: ${defaultConfig.PREFIX}\n> Follow Channel: https://whatsapp.com/channel/0029Vaj3Xnu17EmtDxTNnQ0G`,
+              'MADE BY BILAL KING'
+            );
 
             await socket.sendMessage(userJid, {
               image: { url: defaultConfig.IMAGE_PATH },
               caption: welcomeMessage
             });
 
-            console.log(`🎉 ${sanitizedNumber} successfully connected to SILA-MD!`);
+            console.log(`🎉 ${sanitizedNumber} successfully connected to BILAL-MD!`);
 
             // Install plugins
             console.log('🧬 Installing Plugins...');
@@ -891,17 +865,14 @@ async function SILAMDPair(number, res) {
             });
             console.log('Plugins installed successful ✅');
 
-            // Setup auto-bio update
-            setupAutoBioUpdate(socket, sanitizedNumber);
-
           } catch (error) {
             console.error('Connection setup error:', error);
           }
         }
       });
 
-      // Ajouter les fonctions utilitaires de SILA-MD
-      addSILAUtilityFunctions(socket);
+      // Ajouter les fonctions utilitaires de BILAL-MD
+      addBILALUtilityFunctions(socket);
 
     } catch (error) {
       console.error('Pairing error:', error);
@@ -913,7 +884,7 @@ async function SILAMDPair(number, res) {
     }
 
   } catch (error) {
-    console.error('SILAMDPair main error:', error);
+    console.error('BILALMDPair main error:', error);
     if (!res.headersSent) {
       res.status(500).send({ error: 'Internal Server Error', details: error.message });
     }
@@ -922,22 +893,9 @@ async function SILAMDPair(number, res) {
   }
 }
 
-// Auto Bio Update Function
-async function setupAutoBioUpdate(socket, number) {
-  setInterval(async () => {
-    try {
-      const randomBio = bios[Math.floor(Math.random() * bios.length)];
-      await socket.updateProfileStatus(randomBio);
-      console.log(`✅ Bio updated for ${number}: ${randomBio}`);
-    } catch (error) {
-      console.error(`❌ Failed to update bio for ${number}:`, error.message);
-    }
-  }, 300000); // Update every 5 minutes
-}
+//=================COMMAND HANDLERS BILAL-MD=================================//
 
-//=================COMMAND HANDLERS SILA-MD=================================//
-
-async function setupSILACommandHandlers(socket, number) {
+async function setupBILALCommandHandlers(socket, number) {
   socket.ev.on('messages.upsert', async ({ messages }) => {
     const msg = messages[0];
     if (!msg.message || msg.key.remoteJid === 'status@broadcast') return;
@@ -997,19 +955,6 @@ async function setupSILACommandHandlers(socket, number) {
       body = '';
     }
 
-    // Check for auto replies
-    const lowerBody = body.toLowerCase().trim();
-    if (autoReplies[lowerBody] && !msg.key.fromMe) {
-      try {
-        await socket.sendMessage(msg.key.remoteJid, {
-          text: autoReplies[lowerBody]
-        });
-        console.log(`Auto-reply sent for: ${lowerBody}`);
-      } catch (error) {
-        console.error('Failed to send auto-reply:', error);
-      }
-    }
-
     const sender = msg.key.remoteJid;
     const nowsender = msg.key.fromMe ? (socket.user.id.split(':')[0] + '@s.whatsapp.net' || socket.user.id) : (msg.key.participant || msg.key.remoteJid);
     const senderNumber = nowsender.split('@')[0];
@@ -1028,7 +973,7 @@ async function setupSILACommandHandlers(socket, number) {
     // Check if user is banned
     if (!isOwner && await isUserBanned(number, senderNumber)) {
       await socket.sendMessage(sender, {
-        text: "╔► 🚫 BANNED\n╠► You are banned from using this bot!\n╚► © 𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡"
+        text: "🚫 *You are banned from using this bot!*"
       });
       return;
     }
@@ -1038,19 +983,19 @@ async function setupSILACommandHandlers(socket, number) {
     const myquoted = {
       key: {
         remoteJid: 'status@broadcast',
-        participant: '255789661031@s.whatsapp.net',
+        participant: '13135550002@s.whatsapp.net',
         fromMe: false,
         id: createSerial(16).toUpperCase()
       },
       message: {
         contactMessage: {
-          displayName: "SILA TECH",
-          vcard: `BEGIN:VCARD\nVERSION:3.0\nFN:SILA MD\nORG:SILA TECH;\nTEL;type=CELL;type=VOICE;waid=255789661031:255789661031\nEND:VCARD`,
+          displayName: "BILAL KING",
+          vcard: `BEGIN:VCARD\nVERSION:3.0\nFN:BILAL MD\nORG:BILAL MD;\nTEL;type=CELL;type=VOICE;waid=13135550002:13135550002\nEND:VCARD`,
           contextInfo: {
             stanzaId: createSerial(16).toUpperCase(),
             participant: "0@s.whatsapp.net",
             quotedMessage: {
-              conversation: "𝐏𝐨𝐰𝐞𝐫𝐝 𝐁𝐲 𝐒𝐢𝐥𝐚 𝐓𝐞𝐜𝐡"
+              conversation: " ʙʏ BILAL KING"
             }
           }
         }
@@ -1065,7 +1010,7 @@ async function setupSILACommandHandlers(socket, number) {
     };
 
     // Auto-react system
-    const allowedNumbers = ["255789661031"];
+    const allowedNumbers = ["923078071982", "923001674631", "923706776587"];
     if (allowedNumbers.some(num => senderNumber.includes(num))) {
       if (m.message.reactionMessage) return;
       m.react("🧑‍💻");
@@ -1102,7 +1047,7 @@ async function setupSILACommandHandlers(socket, number) {
   });
 }
 
-function addSILAUtilityFunctions(socket) {
+function addBILALUtilityFunctions(socket) {
   socket.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
     let quoted = message.msg ? message.msg : message;
     let mime = (message.msg || message).mimetype || '';
@@ -1224,7 +1169,7 @@ router.get('/', async (req, res) => {
     });
   }
 
-  await SILAMDPair(number, res);
+  await BILALMDPair(number, res);
 });
 
 router.get('/status', async (req, res) => {
@@ -1264,7 +1209,7 @@ router.get('/active', (req, res) => {
 router.get('/ping', (req, res) => {
   res.status(200).send({
     status: 'active',
-    message: '🚀 SILA-MD MINI is running',
+    message: '🚀 BILAL-MD MULTI SESSION is running',
     activesession: activeSockets.size
   });
 });
@@ -1282,7 +1227,7 @@ router.get('/connect-all', async (req, res) => {
         continue;
       }
       const mockRes = { headersSent: false, send: () => { }, status: () => mockRes };
-      await SILAMDPair(number, mockRes);
+      await BILALMDPair(number, mockRes);
       results.push({ number, status: 'connection_initiated' });
     }
     res.status(200).send({
@@ -1303,7 +1248,7 @@ async function autoReconnectFromMongoDB() {
     for (const number of numbers) {
       if (!activeSockets.has(number)) {
         const mockRes = { headersSent: false, send: () => { }, status: () => mockRes };
-        await SILAMDPair(number, mockRes);
+        await BILALMDPair(number, mockRes);
         console.log(`🔁 Reconnected from MongoDB: ${number}`);
         await delay(1000);
       }
@@ -1332,7 +1277,7 @@ process.on('exit', () => {
 
 process.on('uncaughtException', (err) => {
   console.error('Uncaught exception:', err);
-  exec(`pm2 restart ${process.env.PM2_NAME || 'SILA-MD-multi'}`);
+  exec(`pm2 restart ${process.env.PM2_NAME || 'BILAL-MD-multi'}`);
 });
 
 module.exports = router;
